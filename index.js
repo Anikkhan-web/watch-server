@@ -26,6 +26,7 @@ async function run()
         const servicesCollection = database.collection('addedOrder');
         const usersCollection = database.collection('users');
         const servicesCollectionReview = database.collection('reviews');
+        const servicesCollectionOrder = database.collection('orders');
 
         // get api
         app.get('/addOrder', async (req, res) =>
@@ -42,7 +43,7 @@ async function run()
             const service = req.body;
             console.log('hit the api', service);
             const result = await servicesCollection.insertOne(service);
-            console.log(result);
+
 
             res.json(result);
         });
@@ -61,10 +62,8 @@ async function run()
         app.post('/reviewSite', async (req, res) =>
         {
             const service = req.body;
-            console.log('hit the api', service);
-            const result = await servicesCollectionReview.insertOne(service);
-            console.log(result);
 
+            const result = await servicesCollectionReview.insertOne(service);
             res.json(result);
         });
 
@@ -79,6 +78,32 @@ async function run()
 
 
         })
+
+
+
+        // order post here 
+        app.post('/orders', async (req, res) =>
+        {
+            const service = req.body;
+
+            const result = await servicesCollectionOrder.insertOne(service);
+            res.json(result);
+        });
+
+
+        app.get('/orders', async (req, res) =>
+        {
+
+            const email = req.query.email;
+            const query = { email: email }
+
+            const cursor = servicesCollectionOrder.find(query);
+            const services = await cursor.toArray();
+            res.send(services)
+
+        })
+
+
 
 
         // delete api
