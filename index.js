@@ -104,6 +104,18 @@ async function run()
         })
 
 
+        app.get('/showOrder', async (req, res) =>
+        {
+
+
+            const cursor = servicesCollectionOrder.find({});
+            const services = await cursor.toArray();
+            res.send(services)
+
+
+        })
+
+
 
 
         // delete api
