@@ -99,6 +99,18 @@ async function run()
 
         })
 
+        // delete api
+        app.delete('/orders/:id', async (req, res) =>
+        {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const result = await servicesCollectionOrder.deleteOne(query);
+            res.json(result);
+
+        })
+
+
+
 
         app.get('/showOrder', async (req, res) =>
         {
@@ -111,6 +123,15 @@ async function run()
 
         })
 
+        // delete api
+        app.delete('/showOrder/:id', async (req, res) =>
+        {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const result = await servicesCollectionOrder.deleteOne(query);
+            res.json(result);
+
+        })
 
 
 
@@ -175,7 +196,6 @@ async function run()
 
 
         });
-
 
 
 
