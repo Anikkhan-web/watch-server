@@ -41,10 +41,7 @@ async function run()
         app.post('/addOrder', async (req, res) =>
         {
             const service = req.body;
-            console.log('hit the api', service);
             const result = await servicesCollection.insertOne(service);
-
-
             res.json(result);
         });
 
@@ -82,10 +79,10 @@ async function run()
 
 
         // order post here 
+
         app.post('/orders', async (req, res) =>
         {
             const service = req.body;
-
             const result = await servicesCollectionOrder.insertOne(service);
             res.json(result);
         });
